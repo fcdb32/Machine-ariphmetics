@@ -54,14 +54,23 @@ def test():
 
 
 if __name__ == '__main__':
+    LongNumber.max_mant = 7
+    x_32, f_32 = test()
+    for i in range(len(x_32)):
+        print(str(x_32[i]), " ", str(f_32[i]))
+    LongNumber.max_mant = 15
+    x_64, f_64 = test()
+    for i in range(len(x_64)):
+        print(str(x_64[i]), " ", str(f_64[i]))
+    plt.plot(x_32, f_32, label="32")
+    plt.plot(x_64, f_64, label="64")
+    plt.scatter(x_32, f_32)
+    plt.scatter(x_64, f_64)
 
-    x, f = test()
-    for i in range(len(x)):
-        print(str(x[i]), " ", str(f[i]))
-    plt.plot(x, f)
-    plt.scatter(x, f)
 
     plt.xlabel("parameter")
     plt.ylabel("Error")
+    plt.legend()
     plt.grid()
     plt.show()
+ß

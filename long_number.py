@@ -1,7 +1,10 @@
 from copy import copy, deepcopy
+import math
 
 
 class LongNumber:
+    max_mant = 32
+
     def __init__(self, number, exp=None):
         """Конструктор"""
         self.plus = True
@@ -29,6 +32,11 @@ class LongNumber:
             self.exponent = exp
 
         self.digits = list(map(int, self.digits))
+        self.clipping()
+
+    def clipping(self):
+        if len(self.digits) > self.max_mant:
+            self.digits = self.digits[:self.max_mant]
 
     def __remote_zeros(self):
         """Удаление нулей справа и слева"""
@@ -102,7 +110,7 @@ class LongNumber:
             res.digits[i] %= 10
 
         res.__remote_zeros()
-
+        res.clipping()
         return res
 
     def __neg__(self):
@@ -196,6 +204,7 @@ class LongNumber:
 
             res.exponent = exp + 1
             res.__remote_zeros()
+            res.clipping()
             return res
 
         if not self.plus:
@@ -246,6 +255,7 @@ class LongNumber:
 
             res.exponent = exp + 1
             res.__remote_zeros()
+            res.clipping()
             return res
 
         if (self.plus is False) and (other.plus is False):
@@ -297,6 +307,7 @@ class LongNumber:
             if delit == LongNumber('0') or numbers >= total_numbers:
                 break
 
+        res.clipping()
         return res
 
     def __truediv__(self, other):
@@ -320,6 +331,8 @@ class LongNumber:
             else:
                 res.digits = res.digits[:(i + 1)]
                 res.digits[i] += 1
+
+        res.clipping()
         return res
 
     def __pow__(self, power, modulo=None):
@@ -328,6 +341,8 @@ class LongNumber:
             res *= self
         if power >= 0:
             return res
+            res.clipping()
         else:
-            return LongNumber("1")/res
+            return LongNumber("1") / res
         return res
+        res.clipping()
