@@ -5,12 +5,12 @@ from long_number import LongNumber
 
 def get_vector_x(alpha):
     return [LongNumber("10") ** alpha, LongNumber("1223"), LongNumber("10") ** (alpha - 1),
-            LongNumber("10") ** (alpha - 2), LongNumber("3"), LongNumber("-10") ** (alpha - 5)]
+            LongNumber("10") ** (alpha - 2), LongNumber("3"), LongNumber("-1")*(LongNumber("10") ** (alpha - 5))]
 
 
 def get_vector_y(beta):
-    return [LongNumber("10") ** beta, LongNumber("2"), LongNumber("-10") ** (beta + 1), LongNumber("10") ** beta,
-            LongNumber("2111"), LongNumber("10") ** (beta + 3)]
+    return [LongNumber("10") ** beta, LongNumber("2"), LongNumber("-1")*(LongNumber("10") ** (beta + 1)),
+            LongNumber("10") ** beta, LongNumber("2111"), LongNumber("10") ** (beta + 3)]
 
 
 def get_eps_long():
